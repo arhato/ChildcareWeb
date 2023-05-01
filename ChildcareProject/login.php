@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <input type="Login" value="submit" class="btn" name="login">
+        <input type="text" value="LogIn" class="btn" name="login">
 
         <p>not registered yet?</p>
 
