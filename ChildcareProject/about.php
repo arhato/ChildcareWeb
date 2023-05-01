@@ -94,11 +94,11 @@
                 </div>
                 <p>"I couldn't be happier with the care my child receives at this daycare.
                      The staff are warm, friendly, and highly qualified. They provide a nurturing environment 
-                     that supports my child's development. 
+                     that supports my child's development." 
                 </p>
                 <h3>Prathyusha Sagi</h3>
                 <span>Lecturer</span>
-                <img src="image/pic-1.jpg" alt="">
+                <img src="images/img4.jpg" alt="">
             </div>
 
             <div class="swiper-slider slide">
@@ -111,11 +111,11 @@
                 </div>
                 <p>"This is by far the best daycare center in the area! The staff are experienced, friendly, and truly 
                     care about the children in their care. My child has learned so much since attending this center, and
-                     I am grateful for the structured,nurturing and engaging activities that are provided. 
+                     I am grateful for the structured,nurturing and engaging activities that are provided."
                 </p>
                 <h3>Atif Atif</h3>
                 <span>Engineer</span>
-                <img src="image/pic-2.jpg" alt="">
+                <img src="images/img2.jpg" alt="">
             </div>
 
             <div class="swiper-slider slide">
@@ -126,11 +126,11 @@
                     <i class = "fas fa-star"></i>
                 </div>
                 <p>"My child has been attending this daycare for over a year now and we have had nothing but positive experiences. 
-                    The staff are attentive, caring, and always go above and beyond to make sure my child feels comfortable and happy.
+                    The staff are attentive, caring, and always go above and beyond to make sure my child feels comfortable and happy."
                 </p>
                 <h3>Anup Singh</h3>
                 <span>Singer</span>
-                <img src="image/pic-3.jpg" alt="">
+                <img src="images/img3.jpg" alt="">
             </div>
 
             <div class="swiper-slider slide">
@@ -143,11 +143,11 @@
                 </div>
                 <p>"I am so grateful for the wonderful care my child has received at this daycare. The staff are patient, kind, and always
                      willing to accommodate any special needs or requests. My child has formed strong bonds with the staff and other 
-                     children, which has helped her to feel comfortable and confident in a new and real-time environment.
+                     children, which has helped her to feel comfortable and confident in a new and real-time environment."
                 </p>
                 <h3>Kabir Oli</h3>
                 <span>Model</span>
-                <img src="image/pic-4.jpg" alt="">
+                <img src="images/img1.jpg" alt="">
             </div>
 
             </div>
@@ -201,7 +201,7 @@
 
     </div>
 
-    <div class="credit"> Created By<span> Team AAA</span> | All Rights Reserved</div>
+    <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
 
 </section>
 
