@@ -132,7 +132,7 @@
 
     </div>
 
-    <div class="credit"> Created By<span> Team AAA</span> | All Rights Reserved</div>
+    <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
 
 </section>
 

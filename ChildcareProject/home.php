@@ -156,7 +156,7 @@
                 <h3>Categories</h3>
                 <p>Childcare can be divided into four categories based on age groups: babies, wobblers, toddlers, and preschoolers. 
                 Each category has its own set of developmental needs, which are addressed through age-appropriate activities, toys, and opportunities.</p>
-                <a href="register.php" class="btn"> Register</a>
+                <a href="register .php" class="btn"> Register</a>
             </div>
         </div>
 
@@ -251,7 +251,7 @@
 
     </div>
 
-    <div class="credit"> Created By<span> Team AAA</span> | All Rights Reserved</div>
+    <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
 
 </section>
 
