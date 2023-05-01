@@ -45,7 +45,7 @@
 
 <section class="packages">
 
-    <h1 class="Heading-title">Top destinations</h1>
+    <h1 class="Heading-title">Member login</h1>
 
     <div class="box-container">
 
