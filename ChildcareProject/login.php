@@ -39,48 +39,40 @@
 
 <!-- header section ends -->
     
-<div class="heading" style="background:url(images/header1.jpg) no-repeat">
+<div class="heading" style="background:url(images/about-img.jpg) no-repeat">
     <h1>LogIn</h1>
 </div>
 
-<!-- packages section starts -->
+<!-- login section starts -->
 
-<section class="packages">
+<section class="login">
 
-    <h1 class="Heading-title">Member login</h1>
+    <h1 class="Heading-title">Already a Member?</h1>
 
-    <div class="box-container">
+    <form action="login_form.php" method ="POST" class="login-form">
 
-        <div class="box">
-            <div class="image">
-                <img src="images/img-1.jpg" alt="">
+        <div class="flex">
+            <div class="inputBox">
+                <span>Email:</span>
+                <input type="text" placeholder="Enter your email" name = "email">
             </div>
-            <div class="content"></div>
+            <div class="inputBox">
+                <span>Password:</span>
+                <input type="password" placeholder="Enter your password" name = "password">
+            </div>
         </div>
 
-    </div>
+        <input type="text" value="LogIn" class="btn" name="login">
 
+        <p>not registered yet?</p>
 
+        <a href="register.php"><b>register</b></a>
 
-
+    </form>
 
 </section>
 
-
-
-
-
 <!-- packages section ends -->
-
-
-
-
-
-
-
-
-
-
 
 <!-- footer section starts -->
 
@@ -122,7 +114,7 @@
 
     </div>
 
-    <div class="credit"> Created By<span> Team AAA</span> | All Rights Reserved</div>
+    <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
 
 </section>
 

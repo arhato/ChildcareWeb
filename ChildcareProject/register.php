@@ -45,7 +45,11 @@
         <h1>Register Now</h1>
     </div>
 
+<<<<<<< HEAD
     <!-- booking section starts -->
+=======
+    <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
+>>>>>>> aaeaa7cc8c3f2bbc50835961024b72611cd3c7b3
 
     <section class="booking">
 
