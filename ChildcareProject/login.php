@@ -25,10 +25,12 @@
     <a href="home.php" class="logo">AAAChildcare.</a>
 
     <nav class="navbar">
-        <a href="home.php">Home</a>
-        <a href="about.php">About</a>
-        <a href="login.php">LogIn</a>
+        <a href="index.php">Home</a>
+        <a href="services.php">Services</a>
+        <a href="testinomial.php">Testinomial</a>
         <a href="register.php">Register</a>
+        <a href="login.php">LogIn</a>
+        <a href="contact.php">Contact Us</a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -88,10 +90,10 @@
 
         <div class="box">
             <h3>Quick links</h3>
-            <a href="home.php"><i class="fas fa-angle-right"></i>Home</a>
-            <a href="about.php"><i class="fas fa-angle-right"></i>About</a>
-            <a href="package.php"><i class="fas fa-angle-right"></i>LogIn</a>
-            <a href="book.php"><i class="fas fa-angle-right"></i>Register</a>
+            <a href="index.php"><i class="fas fa-angle-right"></i>Home</a>
+            <a href="services.php"><i class="fas fa-angle-right"></i>Services</a>
+            <a href="login.php"><i class="fas fa-angle-right"></i>LogIn</a>
+            <a href="register.php"><i class="fas fa-angle-right"></i>Register</a>
         </div>
 
         <div class="box">

@@ -460,6 +460,16 @@ section{
     margin-top: 1.5rem;
     border: var(--border);
 }
+.selector{
+    width: 100% ; 
+    padding: 1.2rem 1.4rem;
+    font-size: 1.6rem;
+    color: var(--light-black);
+    box-sizing: border-box;
+    margin-top: 1.5rem;
+    border: var(--border);
+}
+
 
 .booking .book-form .flex .inputBox input:focus{
     background:var(--black);

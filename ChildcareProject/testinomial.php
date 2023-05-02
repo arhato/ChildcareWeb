@@ -25,10 +25,12 @@
     <a href="home.php" class="logo">AAAChildcare.</a>
 
     <nav class="navbar">
-        <a href="home.php">Home</a>
-        <a href="about.php">About</a>
-        <a href="login.php">LogIn</a>
+        <a href="index.php">Home</a>
+        <a href="services.php">Services</a>
+        <a href="testinomial.php">Testinomial</a>
         <a href="register.php">Register</a>
+        <a href="login.php">LogIn</a>
+        <a href="contact.php">Contact Us</a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
@@ -38,41 +40,10 @@
 <!-- header section ends -->
     
 <div class="heading" style="background:url(images/about-img.jpg) no-repeat">
-    <h1>About Us</h1>
+    <h1>Testinomials</h1>
 </div>
 
-<!-- about section starts -->
 
-<section class="about">
-
-    <div class="image">
-        <img src="images/choose.jpg" alt="">
-    </div>
-
-    <div class="content">
-        <h3>why choose us?</h3>
-        <p>Our Childcare will provide your child with a safe, nurturing, and engaging environment to learn and grow.When considering ours, take into account our
-             reputation, location, and flexibility, as well as our staff's qualifications and experience, the 
-             curriculum and activities we offer, and the quality of our facilities and amenities.</p>
-        <div class="icons-container">
-            <div class="icons">
-                <i class="fas fa-star"></i>
-                <span>top rated</span>
-            </div>
-            <div class="icons">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>Best price</span>
-            </div>
-            <div class="icons">         
-                <i class="fas fa-headset"></i>
-                <span>24/7 guidance</span>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<!-- about section ends -->
 
 <!-- reviews section starts -->
 
@@ -161,6 +132,39 @@
 
 <!-- reviews section ends -->
 
+<!-- about section starts -->
+
+<section class="about">
+
+    <div class="image">
+        <img src="images/choose.jpg" alt="">
+    </div>
+
+    <div class="content">
+        <h3>why choose us?</h3>
+        <p>Our Childcare will provide your child with a safe, nurturing, and engaging environment to learn and grow.When considering ours, take into account our
+             reputation, location, and flexibility, as well as our staff's qualifications and experience, the 
+             curriculum and activities we offer, and the quality of our facilities and amenities.</p>
+        <div class="icons-container">
+            <div class="icons">
+                <i class="fas fa-star"></i>
+                <span>top rated</span>
+            </div>
+            <div class="icons">
+                <i class="fas fa-hand-holding-usd"></i>
+                <span>Best price</span>
+            </div>
+            <div class="icons">         
+                <i class="fas fa-headset"></i>
+                <span>24/7 guidance</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
 <!-- footer section starts -->
 
 <section class="footer">
@@ -169,8 +173,8 @@
 
         <div class="box">
             <h3>Quick links</h3>
-            <a href="home.php"><i class="fas fa-angle-right"></i>Home</a>
-            <a href="about.php"><i class="fas fa-angle-right"></i>About</a>
+            <a href="index.php"><i class="fas fa-angle-right"></i>Home</a>
+            <a href="services.php"><i class="fas fa-angle-right"></i>Services</a>
             <a href="login.php"><i class="fas fa-angle-right"></i>LogIn</a>
             <a href="register.php"><i class="fas fa-angle-right"></i>Register</a>
         </div>
