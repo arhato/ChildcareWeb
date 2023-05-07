@@ -47,7 +47,7 @@
 
 <section class="login">
 
-    <h1 class="Heading-title">Already a Member?</h1>
+    <h1 class="Heading-title">Not Registered Yet? <a href="register.php"><i class="fas fa-angle-right"></i>Register Here</a></h1>
 
     <form action="login_form.php" method ="POST" class="login-form">
 
@@ -64,9 +64,7 @@
 
         <input type="text" value="LogIn" class="btn" name="login">
 
-        <p>not registered yet?</p>
 
-        <a href="register.php"><b>register</b></a>
 
     </form>
 

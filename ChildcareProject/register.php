@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -45,22 +45,19 @@
         <h1>Register Now</h1>
     </div>
 
-<<<<<<< HEAD
     <!-- booking section starts -->
-=======
     <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
->>>>>>> aaeaa7cc8c3f2bbc50835961024b72611cd3c7b3
 
     <section class="booking">
 
         <h1 class="heading-title"> Be a Member!</h1>
-
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="book-form" name="f1">
+        <h1 class="Heading-title">Already Registered? <a href="login.php"><i class="fas fa-angle-right"></i>Login Here</a></h1>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="book-form">
 
             <div class="flex">
                 <div class="inputBox">
                     <span>Category:</span>
-                    <select id="selector" name="cagtegory" class="selector">
+                    <select id="selector" name="category" class="selector" value="<?php echo isset($_POST['category']) ? htmlspecialchars($_POST['category']) : ''; ?>">
                         <option value="" selected disabled>Choose here</option>
                         <option value="Babies">Babies</option>
                         <option value="Wobblers">Wobblers</option>
@@ -70,7 +67,7 @@
                 </div>
                 <div class="inputBox">
                     <span>Duration:</span>
-                    <select id="selector" name="duration" class="selector">
+                    <select id="selector" name="duration" class="selector" value="<?php echo isset($_POST['duration']) ? htmlspecialchars($_POST['duration']) : ''; ?>">
                         <option value="" selected disabled>Choose here</option>
                         <option value="Half/Full">Half/Full Day</option>
                         <option value="OneDay">One Day</option>
@@ -80,44 +77,44 @@
                 </div>
                 <div class="inputBox">
                     <span>Child Name:</span>
-                    <input type="text" placeholder="Enter the name" name="name">
+                    <input type="text" placeholder="Enter the name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Child Age:</span>
-                    <input type="text" placeholder="Enter age" name="age">
+                    <input type="text" placeholder="Enter age" name="age" value="<?php echo isset($_POST['age']) ? htmlspecialchars($_POST['age']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Address:</span>
-                    <input type="text" placeholder="Enter your address" name="address">
+                    <input type="text" placeholder="Enter your address" name="address" value="<?php echo isset($_POST['address']) ? htmlspecialchars($_POST['address']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Email:</span>
-                    <input type="email" placeholder="Enter your email" name="email">
+                    <input type="email" placeholder="Enter your email" name="email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
                 </div>
 
                 <div class="inputBox">
                     <span>Phone:</span>
-                    <input type="number" placeholder="Enter your phone number" name="phone">
+                    <input type="number" placeholder="Enter your phone number" name="phone" value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>">
                 </div>
                 <div class="inputBox">
-                    <span>From:</span>
-                    <input type="date" name="from">
+                    <span>Start:</span>
+                    <input type="date" name="start" value="<?php echo isset($_POST['start']) ? htmlspecialchars($_POST['start']) : ''; ?>">
                 </div>
                 <div class="inputBox">
-                    <span>Leave:</span>
-                    <input type="date" name="leave">
+                    <span>Finish:</span>
+                    <input type="date" name="finish" value="<?php echo isset($_POST['finish']) ? htmlspecialchars($_POST['finish']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Username:</span>
-                    <input type="text" placeholder="Enter username" name="username">
+                    <input type="text" placeholder="Enter username - At least 7 characters" name="username" value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Password:</span>
-                    <input type="text" placeholder="Enter password" name="password">
+                    <input type="text" placeholder="Enter password - At least 7 characters" name="password">
                 </div>
             </div>
 
-            <input type="submit" value="Register" class="btn" name="Send">
+            <input type="submit" value="Register" class="btn" name="register">
 
         </form>
 
@@ -181,12 +178,16 @@
 </body>
 
 </html>
+
 <?php
 
-$connection = mysqli_connect('localhost', 'root', ' ', 'childcare');
+$conn = mysqli_connect("localhost", "root", "", "childcare");
 if (!$conn) {
     die("Connection to this database failed due to " . mysqli_connect_error());
+} else {
+    echo "<div class='blink'><font color=4CAF50>Connected</font></div>";
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'] ?? '';
     $duration = $_POST['duration'] ?? '';
@@ -195,23 +196,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST['address'] ?? '';
     $email = $_POST['email'] ?? '';
     $phone = $_POST['phone'] ?? '';
-    $from = $_POST['from'] ?? '';
-    $leave = $_POST['leave'] ?? '';
-    $uname = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $pwd=password_hash($pwd, PASSWORD_DEFAULT);
+    $start = $_POST['start'] ?? '';
+    $finish = $_POST['finish'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $passowrd = $_POST['password'] ?? '';
+    $password = password_hash($passowrd, PASSWORD_DEFAULT);
 
-    $dupCheck = "SELECT COUNT(*) as count FROM `user` WHERE `uname.` = '$uname'";
+    $err = '';
+    $success = '';
+
+    // Check if all fields are filled
+    if (empty($name) || empty($age) || empty($address) || empty($email) || empty($phone) || empty($username) || empty($password)) {
+        $err = "Please fill all the fields.";
+    }
+    // Check if the selected category is valid
+    elseif (!isset($_POST['category']) || ($_POST['category'] != 'Babies' && $_POST['category'] != 'Wobblers' && $_POST['category'] != 'Toddlers' && $_POST['category'] != 'PreSchool')) {
+        $err = "Please select a valid category.";
+    }
+    // Check if the selected duration is valid
+    elseif (!isset($_POST['duration']) || ($_POST['duration'] != 'Half/Full' && $_POST['duration'] != 'OneDay' && $_POST['duration'] != 'ThreeDay' && $_POST['duration'] != 'FiveDay')) {
+        $err = "Please select a valid duration.";
+    }
+    // Check if the email is valid
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err = "Please enter a valid email address.";
+    }
+    // Check if the phone number is valid
+    elseif (!ctype_digit($phone) || strlen($phone) != 10) {
+        $err = "Please enter a valid phone number.";
+    }
+    // Check if the username and password are at least 7 characters long
+    elseif (strlen($username) < 7 || strlen($password) < 7) {
+        $err = "Username and password must be at least 7 characters long.";
+    }
+
+    $dupCheck = "SELECT COUNT(*) as count FROM `user` WHERE `username` = '$username'";
     $checkResult = mysqli_query($conn, $dupCheck);
     $row = mysqli_fetch_assoc($checkResult);
     if (empty($err)) {
         if ($row['count'] > 0) {
             $err = "User already exists";
         } else {
-            $request = " Insert into register_form(category,duration,name,age,address, email,phone, from, leave,username,password) values ('$category','$duration','$name',
-            ,'$age','$address','$email','$phone','$from','$leave','$uname','$pwd')";
+            $query = " Insert into register_form(category,duration,name,age,address, email,phone, start, finish,username,password) values ('$category','$duration','$name',
+            ,'$age','$address','$email','$phone','$start','$finish','$username','$passowrd')";
 
-            $result = mysqli_query($connection, $request);
+            $result = mysqli_query($conn, $query);
             if ($result) {
                 $success = "User Registered.";
             } else {
@@ -219,9 +248,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    header('location:book.php');
-} else {
-    echo "Please try again";
+    echo "<font color=green>" . $success . "</font>";
+    echo "<font color=red>" . $err . "</font>";
+    mysqli_close($conn);
+    echo '<form action="login.php"><input type="submit" value="Login"></form>';
 }
-
 ?>
