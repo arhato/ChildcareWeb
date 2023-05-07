@@ -1,3 +1,64 @@
+<?php
+session_start();
+
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    header("location: index.php");
+    exit;
+}
+$err = '';
+$success = '';
+
+$conn = mysqli_connect("localhost", "root", "", "childcare");
+if (!$conn) {
+    die("Connection to this database failed due to " . mysqli_connect_error());
+} else {
+    echo "<div class='bconn'><font color=4CAF50>Connected</font></div>";
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if (empty(trim($_POST["username"]))||empty(trim($_POST["password"]))) {
+        $err = "Please enter details.";
+    } else {
+        $username = trim($_POST["username"]);
+        $password = trim($_POST["password"]);
+    }
+
+    if (empty($err)) {
+        $query = "SELECT username, password FROM `user` WHERE `username`=?";
+
+        $stmt = mysqli_prepare($conn, $query);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "s", $username);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_store_result($stmt);
+                if (mysqli_stmt_num_rows($stmt) == 1) {
+                    mysqli_stmt_bind_result($stmt, $username, $hashed_password);
+                    if (mysqli_stmt_fetch($stmt)) {
+                        if ($password==$hashed_password) {
+                            session_start();
+                            $_SESSION["loggedin"] = true;
+                            $_SESSION["username"] = $username;
+                            header("location: index.php");
+                        } else {
+                            $err = "Invalid username or password.";
+                        }
+                    }
+                } else {
+                    $err = "Invalid username or password.";
+                }
+            } else {
+                $err = "Something went wrong. Please try again later.";
+            }
+
+            mysqli_stmt_close($stmt);
+        }
+    }
+    
+   
+    mysqli_close($conn);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,14 +108,14 @@
 
 <section class="login">
 
-    <h1 class="Heading-title">Not Registered Yet? <a href="register.php"><i class="fas fa-angle-right"></i>Register Here</a></h1>
+<h1>Not Registered? <a href="register.php"><i class="fas fa-angle-right"></i>Register Here</a></h1>
 
-    <form action="login_form.php" method ="POST" class="login-form">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method ="POST" class="login-form">
 
         <div class="flex">
             <div class="inputBox">
-                <span>Email:</span>
-                <input type="text" placeholder="Enter your email" name = "email">
+                <span>Username:</span>
+                <input type="text" placeholder="Enter your username" name = "username">
             </div>
             <div class="inputBox">
                 <span>Password:</span>
@@ -62,10 +123,8 @@
             </div>
         </div>
 
-        <input type="text" value="LogIn" class="btn" name="login">
-
-
-
+        <input type="submit" value="LogIn" class="btn" name="login">
+        <span class="error-message" style="color:red;font-size:1.6rem;"><?php echo $err; ?></span>
     </form>
 
 </section>
