@@ -26,12 +26,11 @@ if (!isset($_SESSION["loggedin"])) {
 
 <body>
     <?php
-    if (!empty($_GET['status'])) {
-        echo '<div class="loggout_message">You have been logged out!</div>';
+    if (($_SESSION["loggedin"])==false) {
+        echo '<div id="loggout_message" class="loggout_message">You have been logged out!</div>';
     }else{
-        echo '<div class="loggout_message">You have been logged in!</div>';
+        echo '<div id="loggout_message" class="loggout_message">You are logged in!</div>';
     }
-
     ?>
 
     <!-- header section starts  -->

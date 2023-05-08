@@ -12,5 +12,5 @@ session_destroy();
 session_start();
 $_SESSION["loggedin"] = false;
 echo "User Logged Out.";
-header('Location: index.php?status=loggedout');
+header('Location: index.php');
 ?>

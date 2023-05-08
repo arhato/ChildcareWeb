@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <section class="header">
 
-        <a href="home.php" class="logo">AAAChildcare.</a>
+        <a href="index.php" class="logo">AAAChildcare.</a>
 
         <?php if ($_SESSION["loggedin"]) {
             echo ('<nav class="navbar">

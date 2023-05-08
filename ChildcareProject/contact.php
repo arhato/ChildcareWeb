@@ -3,15 +3,53 @@ session_start();
 if (!isset($_SESSION["loggedin"])) {
     $_SESSION["loggedin"] = false;
 }
+$err = '';
+$success = '';
+
+$conn = mysqli_connect("localhost", "root", "", "childcare");
+if (!$conn) {
+    die("Connection to this database failed due to " . mysqli_connect_error());
+} else {
+    echo "<div class='blink'><font color=4CAF50>Connected</font></div>";
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $message = $_POST['message'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone = $_POST['phone'];
+    // Check if all fields are filled
+    if (empty($message) || empty($name) || empty($email) || empty($phone)) {
+        $err = "Please fill all the fields.";
+    }
+
+    $dupCheck = "SELECT COUNT(*) as count FROM `usermessage` WHERE `email` = '$email'";
+    $checkResult = mysqli_query($conn, $dupCheck);
+    $row = mysqli_fetch_assoc($checkResult);
+    if (empty($err)) {
+        if (!$row['count'] > 0) {
+            $query = "INSERT INTO `usermessage`(`message`,`name`,`email`,`phone`) 
+            VALUES('$message', '$name','$email','$phone')";
+
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                $success = "Messege Sent.";
+            } else {
+                $success = "Message cannot be Sent!!.";
+            }
+        }
+    }
+    mysqli_close($conn);
+}
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Contact Us</title>
 
     <!-- swiper css link -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
@@ -60,13 +98,42 @@ if (!isset($_SESSION["loggedin"])) {
     <!-- header section ends -->
 
     <div class="heading" style="background:url(images/about-img.jpg) no-repeat">
-        <h1>You Are Registered</h1>
+        <h1>SEND YOUR MESSAGE TO US!!</h1>
     </div>
-    <section class="booking">
-    <h1 class="heading-title"> You can now login!!!</h1>
-        <h1 class="heading-title"><a href="login.php">Click Here</a></h1>
-    </section>
 
+    <section class="booking">
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="book-form">
+
+            <div class="flex">
+                <div class="inputBox">
+                    <span>Name:</span>
+                    <input type="text" placeholder="Enter the name" name="name" value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                </div>
+                <div class="inputBox">
+                </div>
+                <div class="inputBox">
+                    <span>Email:</span>
+                    <input type="email" name="email" value="<?php echo isset($_POST['rdate']) ? htmlspecialchars($_POST['rdate']) : ''; ?>">
+                </div>
+                <div class="inputBox">
+                </div>
+                <div class="inputBox">
+                    <span>Phone No.:</span>
+                    <input type="number" name="phone" placeholder="Enter your Phone Number">
+                </div>
+                
+                <div class="inputBox">
+                </div>
+                <div class="inputBox">
+                    <span>Message:</span>
+                    <input type="text" name="message" placeholder="Maximum 512 Characters" style="height: 300px;">
+                </div>
+                
+                <input type="submit" value="Send" class="btn" name="messagesend">
+                <span class="error-message" style="color:red;font-size:1.6rem;"><?php echo $err; ?></span>
+        </form>
+
+    </section>
 
     <!-- footer section starts -->
 
@@ -108,7 +175,7 @@ if (!isset($_SESSION["loggedin"])) {
 
         </div>
 
-        <div class="credit"> Created By<span> Team AAA</span> | All Rights Reserved</div>
+        <div class="credit"> Created By<span> Team AAA</span> | @Copyright 2023</div>
 
     </section>
 

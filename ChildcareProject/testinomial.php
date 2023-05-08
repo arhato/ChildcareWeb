@@ -29,7 +29,7 @@ if (!isset($_SESSION["loggedin"])) {
 
 <section class="header">
 
-    <a href="home.php" class="logo">AAAChildcare.</a>
+    <a href="index.php" class="logo">AAAChildcare.</a>
 
     <?php if ($_SESSION["loggedin"]) {
             echo ('<nav class="navbar">
@@ -118,7 +118,7 @@ if (!isset($_SESSION["loggedin"])) {
                 <p>"My child has been attending this daycare for over a year now and we have had nothing but positive experiences. 
                     The staff are attentive, caring, and always go above and beyond to make sure my child feels comfortable and happy."
                 </p>
-                <h3>Anup Singh</h3>
+                <h3>Arjit Singh</h3>
                 <span>One Day</span>
                 <img src="images/img3.jpg" alt="">
             </div>
