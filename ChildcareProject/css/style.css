@@ -69,6 +69,11 @@ section {
     text-shadow: var(--text-shadow);
 }
 
+.comment {
+    display: flex !important;
+    justify-content: center !important;
+}
+
 .btn {
     display: inline-block;
     background: var(--black);
@@ -568,36 +573,6 @@ section {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .footer {
     background: url(../images/footer-bg.jpg) no-repeat;
     background-size: cover;
@@ -645,11 +620,6 @@ section {
 .footer .credit span {
     color: var(--main-color);
 }
-
-
-
-
-
 
 
 /* media queries */

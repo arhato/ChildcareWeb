@@ -35,10 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (mysqli_stmt_num_rows($stmt) == 1) {
                     mysqli_stmt_bind_result($stmt, $username, $hashed_password);
                     if (mysqli_stmt_fetch($stmt)) {
-                        if ($password==$hashed_password) {
+                        //TODO change when refister.php works
+                        if (password_verify($password,$hashed_password)) {
                             session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["username"] = $username;
+                            $success="User Logged In!";
                             header("location: index.php");
                         } else {
                             $err = "Invalid username or password.";
@@ -85,14 +87,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <a href="home.php" class="logo">AAAChildcare.</a>
 
-    <nav class="navbar">
+    <?php if ($_SESSION["loggedin"]) {
+            echo ('<nav class="navbar">
         <a href="index.php">Home</a>
         <a href="services.php">Services</a>
         <a href="testinomial.php">Testinomial</a>
-        <a href="register.php">Register</a>
-        <a href="login.php">LogIn</a>
+        <a href="logout.php">LogOut</a>
         <a href="contact.php">Contact Us</a>
-    </nav>
+        </nav>'
+            );
+        } else {
+            echo ('<nav class="navbar">
+            <a href="index.php">Home</a>
+            <a href="services.php">Services</a>
+            <a href="testinomial.php">Testinomial</a>
+            <a href="register.php">Register</a>
+            <a href="login.php">LogIn</a>
+            <a href="contact.php">Contact Us</a>
+            </nav>'
+            );
+        } ?>
 
     <div id="menu-btn" class="fas fa-bars"></div>
 

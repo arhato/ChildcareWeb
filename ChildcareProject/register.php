@@ -1,3 +1,79 @@
+<?php
+$err = '';
+$success = '';
+
+$conn = mysqli_connect("localhost", "root", "", "childcare");
+if (!$conn) {
+    die("Connection to this database failed due to " . mysqli_connect_error());
+} else {
+    echo "<div class='blink'><font color=4CAF50>Connected</font></div>";
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $category = $_POST['category'] ?? '';
+    $duration = $_POST['duration'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $age = $_POST['age'] ?? '';
+    $address = $_POST['address'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone = $_POST['phone'] ?? '';
+    $start = $_POST['start'] ?? '';
+    $finish = $_POST['finish'] ?? '';
+    $username = $_POST['username'] ?? '';
+    $pwd = $_POST['password'] ?? '';
+    $password = password_hash($pwd, PASSWORD_DEFAULT);
+
+
+    // Check if all fields are filled
+    if (empty($name) || empty($age) || empty($address) || empty($email) || empty($phone) || empty($username) || empty($password)) {
+        $err = "Please fill all the fields.";
+    }
+    // Check if the selected category is valid
+    elseif (!isset($_POST['category']) || ($_POST['category'] != 'Babies' && $_POST['category'] != 'Wobblers' && $_POST['category'] != 'Toddlers' && $_POST['category'] != 'PreSchool')) {
+        $err = "Please select a valid category.";
+    }
+    // Check if the selected duration is valid
+    elseif (!isset($_POST['duration']) || ($_POST['duration'] != 'Half/Full' && $_POST['duration'] != 'OneDay' && $_POST['duration'] != 'ThreeDay' && $_POST['duration'] != 'FiveDay')) {
+        $err = "Please select a valid duration.";
+    }
+    // Check if the email is valid
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $err = "Please enter a valid email address.";
+    }
+    // Check if the phone number is valid
+    elseif (!ctype_digit($phone) || strlen($phone) != 10) {
+        $err = "Please enter a valid phone number.";
+    }
+    // Check if the username and password are at least 7 characters long
+    elseif (strlen($username) < 7 || strlen($password) < 7) {
+        $err = "Username and password must be at least 7 characters long.";
+    }
+
+    $dupCheck = "SELECT COUNT(*) as count FROM `user` WHERE `username` = '$username'";
+    $checkResult = mysqli_query($conn, $dupCheck);
+    $row = mysqli_fetch_assoc($checkResult);
+    if (empty($err)) {
+        if ($row['count'] > 0) {
+            $err = "User already exists";
+        } else {
+            $query = "INSERT INTO `user`(`category`, `duration`, `name`, `age`, `address`, `email`, `phone`, `start`, `finish`, `username`, `password`) 
+            VALUES('$category','$duration','$name','$age','$address','$email','$phone','$start','$finish','$username','$password')";
+
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                $success = "User Registered.";
+            } else {
+                $success = "User cannot be Registered.";
+            }
+        }
+    }
+    mysqli_close($conn);
+    if ($success == "User Registered.") {
+        header('Location:registered.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,14 +102,26 @@
 
         <a href="home.php" class="logo">AAAChildcare.</a>
 
-        <nav class="navbar">
+        <?php if ($_SESSION["loggedin"]) {
+            echo ('<nav class="navbar">
+        <a href="index.php">Home</a>
+        <a href="services.php">Services</a>
+        <a href="testinomial.php">Testinomial</a>
+        <a href="logout.php">LogOut</a>
+        <a href="contact.php">Contact Us</a>
+        </nav>'
+            );
+        } else {
+            echo ('<nav class="navbar">
             <a href="index.php">Home</a>
             <a href="services.php">Services</a>
             <a href="testinomial.php">Testinomial</a>
             <a href="register.php">Register</a>
             <a href="login.php">LogIn</a>
             <a href="contact.php">Contact Us</a>
-        </nav>
+            </nav>'
+            );
+        } ?>
 
         <div id="menu-btn" class="fas fa-bars"></div>
 
@@ -51,7 +139,7 @@
     <section class="booking">
 
         <h1 class="heading-title"> Be a Member!</h1>
-        <h1 class="Heading-title">Already Registered? <a href="login.php"><i class="fas fa-angle-right"></i>Login Here</a></h1>
+        <h1>Already Registered? <a href="login.php"><i class="fas fa-angle-right"></i>Login Here</a></h1>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="book-form">
 
             <div class="flex">
@@ -94,7 +182,7 @@
 
                 <div class="inputBox">
                     <span>Phone:</span>
-                    <input type="number" placeholder="Enter your phone number" name="phone" value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>">
+                    <input type="number" placeholder="Enter your phone number -At least 10 characters" name="phone" value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>">
                 </div>
                 <div class="inputBox">
                     <span>Start:</span>
@@ -110,12 +198,12 @@
                 </div>
                 <div class="inputBox">
                     <span>Password:</span>
-                    <input type="text" placeholder="Enter password - At least 7 characters" name="password">
+                    <input type="password" placeholder="Enter password - At least 7 characters" name="password">
                 </div>
             </div>
 
             <input type="submit" value="Register" class="btn" name="register">
-
+            <span class="error-message" style="color:red;font-size:1.6rem;"><?php echo $err; ?></span>
         </form>
 
     </section>
@@ -178,79 +266,3 @@
 </body>
 
 </html>
-
-<?php
-
-$conn = mysqli_connect("localhost", "root", "", "childcare");
-if (!$conn) {
-    die("Connection to this database failed due to " . mysqli_connect_error());
-} else {
-    echo "<div class='blink'><font color=4CAF50>Connected</font></div>";
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $category = $_POST['category'] ?? '';
-    $duration = $_POST['duration'] ?? '';
-    $name = $_POST['name'] ?? '';
-    $age = $_POST['age'] ?? '';
-    $address = $_POST['address'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $start = $_POST['start'] ?? '';
-    $finish = $_POST['finish'] ?? '';
-    $username = $_POST['username'] ?? '';
-    $passowrd = $_POST['password'] ?? '';
-    $password = password_hash($passowrd, PASSWORD_DEFAULT);
-
-    $err = '';
-    $success = '';
-
-    // Check if all fields are filled
-    if (empty($name) || empty($age) || empty($address) || empty($email) || empty($phone) || empty($username) || empty($password)) {
-        $err = "Please fill all the fields.";
-    }
-    // Check if the selected category is valid
-    elseif (!isset($_POST['category']) || ($_POST['category'] != 'Babies' && $_POST['category'] != 'Wobblers' && $_POST['category'] != 'Toddlers' && $_POST['category'] != 'PreSchool')) {
-        $err = "Please select a valid category.";
-    }
-    // Check if the selected duration is valid
-    elseif (!isset($_POST['duration']) || ($_POST['duration'] != 'Half/Full' && $_POST['duration'] != 'OneDay' && $_POST['duration'] != 'ThreeDay' && $_POST['duration'] != 'FiveDay')) {
-        $err = "Please select a valid duration.";
-    }
-    // Check if the email is valid
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $err = "Please enter a valid email address.";
-    }
-    // Check if the phone number is valid
-    elseif (!ctype_digit($phone) || strlen($phone) != 10) {
-        $err = "Please enter a valid phone number.";
-    }
-    // Check if the username and password are at least 7 characters long
-    elseif (strlen($username) < 7 || strlen($password) < 7) {
-        $err = "Username and password must be at least 7 characters long.";
-    }
-
-    $dupCheck = "SELECT COUNT(*) as count FROM `user` WHERE `username` = '$username'";
-    $checkResult = mysqli_query($conn, $dupCheck);
-    $row = mysqli_fetch_assoc($checkResult);
-    if (empty($err)) {
-        if ($row['count'] > 0) {
-            $err = "User already exists";
-        } else {
-            $query = " Insert into register_form(category,duration,name,age,address, email,phone, start, finish,username,password) values ('$category','$duration','$name',
-            ,'$age','$address','$email','$phone','$start','$finish','$username','$passowrd')";
-
-            $result = mysqli_query($conn, $query);
-            if ($result) {
-                $success = "User Registered.";
-            } else {
-                $success = "User cannot be Registered.";
-            }
-        }
-    }
-    echo "<font color=green>" . $success . "</font>";
-    echo "<font color=red>" . $err . "</font>";
-    mysqli_close($conn);
-    echo '<form action="login.php"><input type="submit" value="Login"></form>';
-}
-?>

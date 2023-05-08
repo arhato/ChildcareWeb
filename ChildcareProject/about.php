@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION["loggedin"])) {
-    $_SESSION["loggedin"] = false;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,10 +55,41 @@ if (!isset($_SESSION["loggedin"])) {
 <!-- header section ends -->
     
 <div class="heading" style="background:url(images/about-img.jpg) no-repeat">
-    <h1>Testinomials</h1>
+    <h1>About Us</h1>
 </div>
 
+<!-- about section starts -->
 
+<section class="about">
+
+    <div class="image">
+        <img src="images/choose.jpg" alt="">
+    </div>
+
+    <div class="content">
+        <h3>why choose us?</h3>
+        <p>Our Childcare will provide your child with a safe, nurturing, and engaging environment to learn and grow.When considering ours, take into account our
+             reputation, location, and flexibility, as well as our staff's qualifications and experience, the 
+             curriculum and activities we offer, and the quality of our facilities and amenities.</p>
+        <div class="icons-container">
+            <div class="icons">
+                <i class="fas fa-star"></i>
+                <span>top rated</span>
+            </div>
+            <div class="icons">
+                <i class="fas fa-hand-holding-usd"></i>
+                <span>Best price</span>
+            </div>
+            <div class="icons">         
+                <i class="fas fa-headset"></i>
+                <span>24/7 guidance</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- about section ends -->
 
 <!-- reviews section starts -->
 
@@ -146,42 +174,10 @@ if (!isset($_SESSION["loggedin"])) {
     </div>
 
     <div class="comment"><a href="testimonial_form.php" class="btn">Add Review</a></div>
+
 </section>
 
 <!-- reviews section ends -->
-
-<!-- about section starts -->
-
-<section class="about">
-
-    <div class="image">
-        <img src="images/choose.jpg" alt="">
-    </div>
-
-    <div class="content">
-        <h3>why choose us?</h3>
-        <p>Our Childcare will provide your child with a safe, nurturing, and engaging environment to learn and grow.When considering ours, take into account our
-             reputation, location, and flexibility, as well as our staff's qualifications and experience, the 
-             curriculum and activities we offer, and the quality of our facilities and amenities.</p>
-        <div class="icons-container">
-            <div class="icons">
-                <i class="fas fa-star"></i>
-                <span>top rated</span>
-            </div>
-            <div class="icons">
-                <i class="fas fa-hand-holding-usd"></i>
-                <span>Best price</span>
-            </div>
-            <div class="icons">         
-                <i class="fas fa-headset"></i>
-                <span>24/7 guidance</span>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-<!-- about section ends -->
 
 <!-- footer section starts -->
 
@@ -191,15 +187,15 @@ if (!isset($_SESSION["loggedin"])) {
 
         <div class="box">
             <h3>Quick links</h3>
-            <a href="index.php"><i class="fas fa-angle-right"></i>Home</a>
-            <a href="services.php"><i class="fas fa-angle-right"></i>Services</a>
+            <a href="home.php"><i class="fas fa-angle-right"></i>Home</a>
+            <a href="about.php"><i class="fas fa-angle-right"></i>About</a>
             <a href="login.php"><i class="fas fa-angle-right"></i>LogIn</a>
             <a href="register.php"><i class="fas fa-angle-right"></i>Register</a>
         </div>
 
         <div class="box">
             <h3>Extra links</h3>
-            <a href="#"><i class="fas fa-angle-right"></i>Ask Questions</a>
+            <a href="login.php"><i class="fas fa-angle-right"></i>Ask Questions</a>
             <a href="about.php"><i class="fas fa-angle-right"></i>About Us</a>
             <a href="#"><i class="fas fa-angle-right"></i>Privacy Policy</a>
             <a href="#"><i class="fas fa-angle-right"></i>Terms and Conditions</a>
