@@ -621,6 +621,14 @@ section {
     color: var(--main-color);
 }
 
+.loggout_message{
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    background-color: rgb(30, 123, 52);
+    color: #eee;
+}
+
 
 /* media queries */
 

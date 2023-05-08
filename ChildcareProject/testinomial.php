@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION["loggedin"])) {
     $_SESSION["loggedin"] = false;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,7 @@ if (!isset($_SESSION["loggedin"])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Testinomial</title>
 
     <!-- swiper css link -->
     <link rel = "stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
@@ -86,7 +87,7 @@ if (!isset($_SESSION["loggedin"])) {
                      that supports my child's development." 
                 </p>
                 <h3>Prathyusha Sagi</h3>
-                <span>Lecturer</span>
+                <span>One Day</span>
                 <img src="images/img4.jpg" alt="">
             </div>
 
@@ -103,7 +104,7 @@ if (!isset($_SESSION["loggedin"])) {
                      I am grateful for the structured,nurturing and engaging activities that are provided."
                 </p>
                 <h3>Atif Atif</h3>
-                <span>Engineer</span>
+                <span>Three Day</span>
                 <img src="images/img2.jpg" alt="">
             </div>
 
@@ -118,7 +119,7 @@ if (!isset($_SESSION["loggedin"])) {
                     The staff are attentive, caring, and always go above and beyond to make sure my child feels comfortable and happy."
                 </p>
                 <h3>Anup Singh</h3>
-                <span>Singer</span>
+                <span>One Day</span>
                 <img src="images/img3.jpg" alt="">
             </div>
 
@@ -135,7 +136,7 @@ if (!isset($_SESSION["loggedin"])) {
                      children, which has helped her to feel comfortable and confident in a new and real-time environment."
                 </p>
                 <h3>Kabir Oli</h3>
-                <span>Model</span>
+                <span>Half/ Full Day</span>
                 <img src="images/img1.jpg" alt="">
             </div>
 
@@ -144,8 +145,10 @@ if (!isset($_SESSION["loggedin"])) {
         </div>
 
     </div>
-
-    <div class="comment"><a href="testimonial_form.php" class="btn">Add Review</a></div>
+    <?php if ($_SESSION["loggedin"]) {
+    echo('<div class="comment"><a href="testimonial_form.php" class="btn">Add Review</a></div>');
+    }
+    ?>
 </section>
 
 <!-- reviews section ends -->

@@ -25,6 +25,14 @@ if (!isset($_SESSION["loggedin"])) {
 </head>
 
 <body>
+    <?php
+    if (!empty($_GET['status'])) {
+        echo '<div class="loggout_message">You have been logged out!</div>';
+    }else{
+        echo '<div class="loggout_message">You have been logged in!</div>';
+    }
+
+    ?>
 
     <!-- header section starts  -->
 
@@ -142,6 +150,21 @@ if (!isset($_SESSION["loggedin"])) {
 
     <!-- services section ends -->
 
+    <section class="home-offer">
+
+        <div class="content">
+            <h3>Upto 50% off</h3>
+            <p>Register your child today and receive 50% off the registration fee!
+                Take advantage of this limited-time offer to provide your child with
+                the best possible start in their educational journey. Our experienced
+                and caring staff is dedicated to providing a safe, nurturing, and
+                stimulating environment for your child to grow and thrive.</p>
+            <a href="register.php" class="btn">Register now</a>
+        </div>
+
+    </section>
+
+    <!-- home packages section ends -->
     <!-- home about section starts -->
 
     <section class="home-about">
@@ -207,31 +230,14 @@ if (!isset($_SESSION["loggedin"])) {
             </div>
 
         </div>
-
-        <div class="load-more"><a href="login.php" class="btn">Login</a></div>
-
+        <?php if ($_SESSION["loggedin"] == false) {
+            echo ('<div class="load-more"><a href="login.php" class="btn">Login</a></div>');
+            echo ('<div class="load-more"><a href="register.php" class="btn">Register</a></div>');
+        }
+        ?>
     </section>
 
     <!-- home packages section ends -->
-
-    <!-- home offer section starts -->
-
-    <section class="home-offer">
-
-        <div class="content">
-            <h3>Upto 50% off</h3>
-            <p>Register your child today and receive 50% off the registration fee!
-                Take advantage of this limited-time offer to provide your child with
-                the best possible start in their educational journey. Our experienced
-                and caring staff is dedicated to providing a safe, nurturing, and
-                stimulating environment for your child to grow and thrive.</p>
-            <a href="register.php" class="btn">Register now</a>
-        </div>
-
-    </section>
-
-    <!-- home packages section ends -->
-
 
     <!-- footer section starts -->
 

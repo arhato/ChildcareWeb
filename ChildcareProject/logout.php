@@ -11,7 +11,6 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 session_start();
 $_SESSION["loggedin"] = false;
-header('Location: index.php');
-
-
+echo "User Logged Out.";
+header('Location: index.php?status=loggedout');
 ?>
